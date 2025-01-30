@@ -248,7 +248,7 @@
             }
         }
 
-        function openPanel(contentData){
+        function OpenContentPanel(contentData){
             // Get the type of the content displayed
             const contentType = contentData.type || "custom";
 
@@ -269,22 +269,24 @@
             closePanel(notifyUnity);
         }
         
-        function SetUnityUrl(newUrl, notifyUnity){
+        function SetQueryParamsWeb(newUrl){
             let currentHash = window.location.hash;
 
-            let newHash = '#' + newUrl;
+            let newHash = '?' + newUrl;
 
             window.location.href = window.location.href.split('#')[0] + newHash;
-
-            if (notifyUnity) {
-                if (unityInstanceRef) {
-                    unityInstanceRef.SendMessage('WebBridge', 'StartApp');
-                } else {
-                    console.log("unity instance does not exist");
-                }
-            }
         }
+    
+        function dispatchReactUnityEvent(eventName, ...parameters) {
+            //executeFunctionByName(eventName,...parameters);
+            window[eventName](...parameters);
+        }
+
+
+        window.dispatchReactUnityEvent = dispatchReactUnityEvent;
     </script>
+
+    
 </body>
 
 </html>
