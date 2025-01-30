@@ -223,8 +223,7 @@
                 isEscapePressed = false;
             }
         });
-        window.addEventListener("resize", detectResize);
-
+        
         //Functions
         function closePanel(notifyUnity) {
             console.log("Unityref: " + unityInstanceRef);
@@ -269,12 +268,20 @@
         function changeStation(notifyUnity){
             closePanel(notifyUnity);
         }
+        
+        function SetUnityUrl(newUrl, notifyUnity){
+            let currentHash = window.location.hash;
 
-        function detectResize() {
-            if (unityInstanceRef) {
-                unityInstanceRef.SendMessage('WebBridge', 'WindowResize', (window.innerWidth + " " + window.innerHeight));
-            } else {
-                console.log("unity instance does not exist");
+            let newHash = '#' + newUrl;
+
+            window.location.href = window.location.href.split('#')[0] + newHash;
+
+            if (notifyUnity) {
+                if (unityInstanceRef) {
+                    unityInstanceRef.SendMessage('WebBridge', 'StartApp');
+                } else {
+                    console.log("unity instance does not exist");
+                }
             }
         }
     </script>
