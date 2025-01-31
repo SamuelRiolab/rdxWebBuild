@@ -265,11 +265,11 @@
             closeButton.style.display = "block";
         }
         
-        function changeStation(notifyUnity){
+        function ChangeStation(notifyUnity){
             closePanel(notifyUnity);
         }
         
-        function SetQueryParamsWeb(newUrl){
+        function SetQueryParams(newUrl){
             let currentHash = window.location.hash;
 
             let newHash = '?' + newUrl;
@@ -278,7 +278,6 @@
         }
     
         function dispatchReactUnityEvent(eventName, ...parameters) {
-            //executeFunctionByName(eventName,...parameters);
             window[eventName](...parameters);
         }
 
